@@ -6,7 +6,7 @@ class GameLogic():
 
     print("Game Logic Object Created")
     # Agrega código aquí para administrar la lógica de tu juego
-    turn = Piece.White
+    turn = Piece.Black
     Xpos = 0
     Ypos = 0
     boardArray = 0
@@ -17,21 +17,21 @@ class GameLogic():
 
 
     def updateparams(self,boardArray,xpos,ypos):
-        #actualizar las variables actuales
+        #Actualizar las variables actuales
         self.Xpos = xpos
         self.Ypos = ypos
         self.boardArray=boardArray
 
 
     def checklogic(self,boardArray,xpos,ypos):
-        #actualizar las variables actuales
+        #Actualizar las variables actuales
         self.Xpos = xpos
         self.Ypos = ypos
         self.boardArray=boardArray
 
 
     def checkvacant(self):
-        #comprobar si el puesto está vacante o no
+        #Comprobar si el puesto está vacante o no
         if self.boardArray[self.Ypos][self.Xpos].Piece==Piece.NoPiece :
             return True
         else :
@@ -39,7 +39,7 @@ class GameLogic():
 
 
     def changeturn(self):
-        # función para intercambiar turnos
+        # Función para intercambiar turnos
         print("turn changed")
         if self.turn == Piece.Black:
             self.turn = Piece.White
@@ -48,7 +48,7 @@ class GameLogic():
 
 
     def placestone(self):
-       # función para colocar la piedra en el tablero
+       # Función para colocar la piedra en el tablero
         if self.turn == Piece.Black:
             self.boardArray[self.Ypos][self.Xpos].Piece = Piece.Black
         else:
@@ -59,7 +59,7 @@ class GameLogic():
 
 
     def updateLiberties(self):
-        #actualizar las libertades de todas las piedras disponibles
+        #Actualizar las libertades de todas las piedras disponibles
         count = 0
         for row in self.boardArray :
             for cell in row :
@@ -79,7 +79,7 @@ class GameLogic():
 
 
     def updatecaptures(self):
-        # update captures of entire board, i.e. remove all stone who have 0 liberties left
+        # Actualizar las capturas de todo el tablero, es decir, eliminar todas las piedras a las que les quedan 0 libertades
         for row in self.boardArray :
             for cell in row :
                 if(cell.liberties==0 and cell.Piece != Piece.NoPiece):
@@ -96,7 +96,7 @@ class GameLogic():
 
 
     def updatecaptures2(self):
-        # function to check if any of the neighbouring stones of the current placement has 0 liberties left , if yes then capture them
+        # Función para verificar si alguna de las piedras vecinas de la ubicación actual tiene 0 libertades restantes, si es así, entonces captúrelas
         if self.boardArray[self.Ypos][self.Xpos].getup(self.boardArray) != None and self.boardArray[self.Ypos][
                 self.Xpos].getup(self.boardArray).liberties == 0 and self.boardArray[self.Ypos][
                 self.Xpos].getup(self.boardArray).Piece != Piece.NoPiece :
@@ -117,13 +117,13 @@ class GameLogic():
 
 
     def capturePiece(self,xpos,ypos):
-        # captures a piece at the given position
-        if self.boardArray[ypos][xpos].Piece == 1:  # if the piece is white
+        # Captura una pieza en la posición dada
+        if self.boardArray[ypos][xpos].Piece == 1:  # Si la pieza es Blanca.
             self.blackprisoners = self.blackprisoners + 1
             self.boardArray[ypos][xpos] = Stone(Piece.NoPiece, xpos, ypos)
             return "White Stone Captured at x: " + str(xpos) + ", y: " + str(ypos)
 
-        else:  # if the piece is black
+        else:  # Si la pieza es Negra.
             self.whiteprisoners = self.whiteprisoners + 1
             self.boardArray[ypos][xpos] = Stone(Piece.NoPiece, xpos, ypos)
             return "Black Stone Captured at x: " + str(xpos) + ", y: " + str(ypos)
@@ -136,7 +136,7 @@ class GameLogic():
         else :
             oppositeplayer =Piece.Black
         count=0
-        # counts the neighbouring positions for opposite stones or nulls(end of board)
+        # Cuenta las posiciones vecinas para piedras opuestas o nulos (final del tablero)
         if self.boardArray[self.Ypos][self.Xpos].getup(self.boardArray) == None or self.boardArray[self.Ypos][self.Xpos].getup(self.boardArray).Piece == oppositeplayer :
             count=count+1
         if self.boardArray[self.Ypos][self.Xpos].getleft(self.boardArray) == None or self.boardArray[self.Ypos][self.Xpos].getleft(self.boardArray).Piece == oppositeplayer :
@@ -182,7 +182,7 @@ class GameLogic():
 
 
     def updateTeritories(self):
-        # update the current positions occupied by each player
+        # Actualizar las posiciones actuales ocupadas por cada jugador
         countb = 0
         countw = 0
         for row in self.boardArray:

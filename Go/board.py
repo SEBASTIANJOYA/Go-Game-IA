@@ -19,7 +19,7 @@ class Board(QFrame):  # base the board on a QFrame widget
 
     boardWidth = 7  # board width is set to 7
     boardHeight = 7  # board height is set to 7
-    timerSpeed = 1000  # the timer updates ever 1 second
+    timerSpeed = 1000000  # the timer updates ever 1 second
     counter = 120  # countdown is set to two minutes
 
     gamelogic = GameLogic()
